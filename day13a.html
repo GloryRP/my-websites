@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        background-color: #fff;
+      }
+      .header {
+        background: linear-gradient(135deg,#1877f2,#1877f2,#1877f2);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      .footer {
+        background: linear-gradient(135deg,#1877f2,#1877f2,#1877f2);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .converter-section {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        background-color: #fff;
+      }
+      .result {
+        margin-top: 20px;
+      }
+      .result p {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .search-bar {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+    </style>
+</head>
+<body>
+  <div class="header">
+    <h1>All-in-One Utility Hub</h1>
+<p>Your go-to tools for calculations and conversions</p>
+<div class="search-bar">
+  <input type="text" id="searchInput" class="form-control" placeholder="Search for tools...">
+</div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- Age Calculator -->
+      <div class="col-md-6">
+        <div class="converter-section">
+          <h2>Age Calculator</h2>
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" class="form-control">
+          </div>
+          <button class="btn btn-primary mt-3" onclick="CalculateAge()">Calculate Age</button>
+          <div class="result">
+            <p>Age in years: <span id="years"></span></p>
+            <p>Age in months: <span id="months"></span></p>
+            <p>Age in hours: <span id="hours"></span></p>
+            <p>Age in minutes: <span id="minutes"></span></p>
+            <p>Age in seconds: <span id="seconds"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Distance Converter -->
+      <div class="col-md-6">
+        <div class="converter-section">
+          <h2>Distance Converter</h2>
+          <div>
+            <label for="distance">Distance:</label>
+            <input type="number" id="distance" class="form-control">
+          </div>
+          <div>
+            <label for="unit">Unit:</label>
+            <select id="unit" class="form-control">
+              <option value="km">Kilometers</option>
+              <option value="m">Meters</option>
+              <option value="in">Inches</option> 
+            </select>
+          </div>
+          <button class="btn btn-primary mt-3" onclick="convertDistance()">Convert</button>
+          <div class="result">
+            <p>Distance in Kilometers: <span id="km"></span></p>
+            <p>Distance in Meters: <span id="m"></span></p>
+            <p>Distance in Inches: <span id="in"></span></p>
+          </div>
+        </div>
+      </div>
+       <!-- BMI calculator -->
+      <div class="col-md-6">
+        <div class="converter-section">
+          <h2>BMI Calculator</h2>
+          <div class="form-group">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="height">Height (Cm):</label>
+            <input type="number" id="height" class="form-control">
+          </div>
+          <button class="btn btn-primary mt-3" onclick="calculateBMI()">Calculate BMI</button>
+          <div class="result">
+            <p>BMI: <span id="bmi"></span></p>
+            <p>Category: <span id="bmiCategory"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Currency Converter -->
+      <div class="col-md-6">
+        <div class="converter-section">
+          <h2>Currency Converter</h2>
+          <div>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" class="form-control">
+          </div>
+          <div>
+            <label for="fromCurrency">From:</label>
+            <select id="fromCurrency" class="form-control">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="INR">INR</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </div>
+          <div>
+            <label for="toCurrency">To:</label>
+            <select id="toCurrency" class="form-control">
+              <option value="INR">INR</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </div>
+          <button class="btn btn-primary mt-3" onclick="convertCurrency()">Convert</button>
+          <div class="result">
+            <p>Converted Amount: <span id="convertedAmount"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMI Calculator -->
+<div class="col-md-6">
+  <div class="converter-section">
+    <h2>Loan EMI Calculator</h2>
+    <div class="form-group">
+      <label for="loanAmount">Loan Amount:</label>
+      <input type="number" id="loanAmount" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="interestRate">Annual Interest Rate (%):</label>
+      <input type="number" id="interestRate" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="loanTenure">Loan Tenure (Years):</label>
+      <input type="number" id="loanTenure" class="form-control">
+    </div>
+    <button class="btn btn-primary mt-3" onclick="calculateEMI()">Calculate EMI</button>
+    <div class="result">
+      <p>Monthly EMI: <span id="emiAmount"></span></p>
+    </div>
+  </div>
+</div>
+
+<!-- Data Storage Converter -->
+<div class="col-md-6">
+  <div class="converter-section">
+    <h2>Data Storage Converter</h2>
+    <div class="form-group">
+      <label for="dataAmount">Data Amount:</label>
+      <input type="number" id="dataAmount" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="dataUnit">From Unit:</label>
+      <select id="dataUnit" class="form-control">
+        <option value="bytes">Bytes</option>
+        <option value="KB">Kilobytes (KB)</option>
+        <option value="MB">Megabytes (MB)</option>
+        <option value="GB">Gigabytes (GB)</option>
+        <option value="TB">Terabytes (TB)</option>
+      </select>
+    </div>
+    <button class="btn btn-primary mt-3" onclick="convertData()">Convert</button>
+    <div class="result">
+      <p>Bytes: <span id="bytes"></span></p>
+      <p>Kilobytes (KB): <span id="kilobytes"></span></p>
+      <p>Megabytes (MB): <span id="megabytes"></span></p>
+      <p>Gigabytes (GB): <span id="gigabytes"></span></p>
+      <p>Terabytes (TB): <span id="terabytes"></span></p>
+    </div>
+  </div>
+</div>
+  </div>
+ </div>
+
+ <div class="footer">
+  <p>&copy; 2024 Digital Tools Hub. All rights reserved.</p>
+  <p>For support, contact us at <a href="mailto:support@example.com" style="color: #fff;">gloryrp58@gmail.com</a></p>
+  <p>
+    <a href="#searchInput" style="color: #fff; text-decoration: underline;">Back to top</a>
+  </p>
+</div>
+
+
+  <!-- JavaScript -->
+  <script>
+    function CalculateAge(){
+      var dob = document.getElementById('dob').value;
+      var today = new Date();
+      var birthDate = new Date(dob);
+      var ageInYears = today.getFullYear() - birthDate.getFullYear();
+      var ageInMonths = (ageInYears * 12) + (today.getMonth() - birthDate.getMonth());
+      var ageInHours = ageInYears * 365 * 24;
+      var ageInMinutes = ageInYears * 365 * 24 * 60;
+      var ageInSeconds = ageInYears * 365 * 24 * 60 * 60;
+
+      document.getElementById('years').textContent = ageInYears;
+      document.getElementById('months').textContent = ageInMonths;
+      document.getElementById('hours').textContent = ageInHours;
+      document.getElementById('minutes').textContent = ageInMinutes;
+      document.getElementById('seconds').textContent = ageInSeconds;
+    }
+
+    function convertDistance(){
+      var distance = document.getElementById('distance').value;
+      var unit = document.getElementById('unit').value;
+
+      if (unit === 'km') {
+        document.getElementById('km').textContent = distance;
+        document.getElementById('m').textContent = distance * 1000;
+        document.getElementById('in').textContent = distance * 39370.1;
+      } else if (unit === 'm') {
+        document.getElementById('km').textContent = distance / 1000;
+        document.getElementById('m').textContent = distance;
+        document.getElementById('in').textContent = distance * 39.3701;
+      } else if (unit === 'in') {
+        document.getElementById('km').textContent = distance / 39370.1;
+        document.getElementById('m').textContent = distance / 39.3701;
+        document.getElementById('in').textContent = distance;
+      }
+    }
+
+    function convertCurrency(){
+      var amount = document.getElementById('amount').value;
+      var fromCurrency = document.getElementById('fromCurrency').value;
+      var toCurrency = document.getElementById('toCurrency').value;
+      var exchangeRates = {
+        "USD": {
+          "INR": 83.0,
+          "EUR": 0.93,
+          "GBP": 0.82
+        },
+        "EUR": {
+          "INR": 89.0,
+          "USD": 1.08,
+          "GBP": 0.88
+        },
+        "GBP": {
+          "INR": 102.0,
+          "USD": 1.22,
+          "EUR": 1.14
+        },
+        "INR": {
+          "USD": 0.012,
+          "EUR": 0.011,
+          "GBP": 0.0098
+        }
+      };
+
+      var convertedAmount;
+      if (fromCurrency === toCurrency) {
+        convertedAmount = amount; // No conversion needed if currencies are the same
+      } else {
+        convertedAmount = (amount * exchangeRates[fromCurrency][toCurrency]).toFixed(2);
+      }
+
+      document.getElementById('convertedAmount').textContent = convertedAmount + ' ' + toCurrency;
+    }
+    
+    function calculateBMI() {
+    var weight = document.getElementById('weight').value;
+    var heightCm = document.getElementById('height').value;
+
+    if (weight && heightCm) {
+        var heightM = heightCm / 100; // Convert height from cm to meters
+        var bmi = (weight / (heightM * heightM)).toFixed(2); // Calculate BMI and round to 2 decimal places
+
+        var bmiCategory;
+        if (bmi < 18.5) {
+            bmiCategory = "Underweight";
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+            bmiCategory = "Normal weight";
+        } else if (bmi >= 25 && bmi < 29.9) {
+            bmiCategory = "Overweight";
+        } else {
+            bmiCategory = "Obese";
+        }
+
+        document.getElementById('bmi').textContent = bmi;
+        document.getElementById('bmiCategory').textContent = bmiCategory;
+    } else {
+        document.getElementById('bmi').textContent = "N/A";
+        document.getElementById('bmiCategory').textContent = "Please enter valid values for weight and height.";
+    }
+}
+
+function calculateEMI() {
+    var loanAmount = document.getElementById('loanAmount').value;
+    var annualInterestRate = document.getElementById('interestRate').value;
+    var loanTenure = document.getElementById('loanTenure').value;
+
+    if (loanAmount && annualInterestRate && loanTenure) {
+        var monthlyInterestRate = (annualInterestRate / 12) / 100; // Monthly interest rate in decimal
+        var numberOfMonths = loanTenure * 12; // Loan tenure in months
+
+        var emi = (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfMonths)) / 
+                  (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);
+
+        document.getElementById('emiAmount').textContent = emi.toFixed(2); // Round off to 2 decimal places
+    } else {
+        document.getElementById('emiAmount').textContent = "Please enter valid values.";
+    }
+}
+
+function convertData() {
+    var dataAmount = document.getElementById('dataAmount').value;
+    var dataUnit = document.getElementById('dataUnit').value;
+
+    var bytes;
+    switch(dataUnit) {
+        case 'bytes':
+            bytes = dataAmount;
+            break;
+        case 'KB':
+            bytes = dataAmount * 1024;
+            break;
+        case 'MB':
+            bytes = dataAmount * 1024 * 1024;
+            break;
+        case 'GB':
+            bytes = dataAmount * 1024 * 1024 * 1024;
+            break;
+        case 'TB':
+            bytes = dataAmount * 1024 * 1024 * 1024 * 1024;
+            break;
+        default:
+            bytes = 0;
+    }
+
+    var kilobytes = bytes / 1024;
+    var megabytes = kilobytes / 1024;
+    var gigabytes = megabytes / 1024;
+    var terabytes = gigabytes / 1024;
+
+    document.getElementById('bytes').textContent = bytes.toFixed(2);
+    document.getElementById('kilobytes').textContent = kilobytes.toFixed(2);
+    document.getElementById('megabytes').textContent = megabytes.toFixed(2);
+    document.getElementById('gigabytes').textContent = gigabytes.toFixed(2);
+    document.getElementById('terabytes').textContent = terabytes.toFixed(2);
+}
+
+document.getElementById('searchInput').addEventListener('keyup', function() {
+  var input = document.getElementById('searchInput').value.toLowerCase();
+  var sections = document.querySelectorAll('.converter-section');
+  
+  sections.forEach(function(section) {
+    var title = section.querySelector('h2').textContent.toLowerCase();
+    if (title.includes(input)) {
+      section.style.display = '';
+    } else {
+      section.style.display = 'none';
+    }
+  });
+});
+  
+</script>
+</body>
+</html>
